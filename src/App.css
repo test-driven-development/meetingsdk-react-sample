@@ -6,7 +6,7 @@ main {
 
 main button {
   margin-top: 20px;
-  background-color: #2D8CFF;
+  background-color: #2d8cff;
   color: #ffffff;
   text-decoration: none;
   padding-top: 10px;
@@ -21,5 +21,5 @@ main button {
 }
 
 main button:hover {
-  background-color: #2681F2;
+  background-color: #2681f2;
 }

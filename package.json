@@ -24,12 +24,20 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:dev": "yarn --frozen-lockfile && yarn validate",
+    "lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx src",
+    "format": "prettier --ignore-path .gitignore --write src public",
+    "test:ci": "react-scripts test --watchAll=false",
+    "build:ci": "yarn build --frozen-lockfile --production",
+    "tdd": "react-scripts test",
+    "validate": "yarn lint && yarn format && yarn build"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "prettier"
     ]
   },
   "browserslist": {
@@ -45,7 +53,7 @@
     ]
   },
   "volta": {
-    "node": "18.14.0"
+    "node": "16.19.0"
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.6.0",

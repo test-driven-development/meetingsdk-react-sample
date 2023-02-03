@@ -1,11 +1,10 @@
-import React from 'react';
+import React from 'react'
 
-import './App.css';
-import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
+import './App.css'
+import ZoomMtgEmbedded from '@zoomus/websdk/embedded'
 
 function App() {
-
-  const client = ZoomMtgEmbedded.createClient();
+  const client = ZoomMtgEmbedded.createClient()
 
   // setup your signature endpoint here: https://github.com/zoom/meetingsdk-sample-signature-node.js
   var signatureEndpoint = ''
@@ -22,55 +21,66 @@ function App() {
   var registrantToken = ''
 
   function getSignature(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     fetch(signatureEndpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         meetingNumber: meetingNumber,
-        role: role
-      })
-    }).then(res => res.json())
-    .then(response => {
-      startMeeting(response.signature)
-    }).catch(error => {
-      console.error(error)
+        role: role,
+      }),
     })
+      .then(res => res.json())
+      .then(response => {
+        startMeeting(response.signature)
+      })
+      .catch(error => {
+        console.error(error)
+      })
   }
 
   function startMeeting(signature) {
-
-    let meetingSDKElement = document.getElementById('meetingSDKElement');
+    let meetingSDKElement = document.getElementById('meetingSDKElement')
 
     client.init({
       debug: true,
       zoomAppRoot: meetingSDKElement,
       language: 'en-US',
       customize: {
-        meetingInfo: ['topic', 'host', 'mn', 'pwd', 'telPwd', 'invite', 'participant', 'dc', 'enctype'],
+        meetingInfo: [
+          'topic',
+          'host',
+          'mn',
+          'pwd',
+          'telPwd',
+          'invite',
+          'participant',
+          'dc',
+          'enctype',
+        ],
         toolbar: {
           buttons: [
             {
               text: 'Custom Button',
               className: 'CustomButton',
               onClick: () => {
-                console.log('custom button');
-              }
-            }
-          ]
-        }
-      }
-    });
+                console.log('custom button')
+              },
+            },
+          ],
+        },
+      },
+    })
 
     client.join({
-    	sdkKey: sdkKey,
-    	signature: signature,
-    	meetingNumber: meetingNumber,
-    	password: passWord,
-    	userName: userName,
+      sdkKey: sdkKey,
+      signature: signature,
+      meetingNumber: meetingNumber,
+      password: passWord,
+      userName: userName,
       userEmail: userEmail,
-      tk: registrantToken
+      tk: registrantToken,
     })
   }
 
@@ -87,7 +97,7 @@ function App() {
         <button onClick={getSignature}>Join Meeting</button>
       </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
